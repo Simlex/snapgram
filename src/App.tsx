@@ -1,9 +1,35 @@
+import { Routes, Route } from "react-router-dom"
 import React from 'react';
+import './globals.css';
+import SigninForm from "./_auth/forms/SigninForm";
+import SignupForm from "./_auth/forms/SignupForm";
+import { Home } from "./_root/pages";
+import AuthLayout from "./_auth/AuthLayout";
+import RootLayout from "./_root/RootLayout";
+import { Toaster } from "./components/ui/toaster";
 
 const App = () => {
-  return (
-    <div>App</div>
-  )
+    return (
+        <main className="flex h-screen">
+            <Routes>
+                {/* Public routes */}
+                <Route element={<AuthLayout />}>
+                    <Route path="/sign-in" element={<SigninForm />} />
+                    <Route path="/sign-up" element={<SignupForm />} />
+                </Route>
+
+                {/* Private routes */}
+                <Route element={<RootLayout />}>
+                    <Route index element={<Home />} />
+                    <Route path="/about" element={<h1>About</h1>} />
+                </Route>
+
+                {/* 404 */}
+            </Routes>
+            
+            <Toaster />
+        </main>
+    )
 }
 
 export default App
