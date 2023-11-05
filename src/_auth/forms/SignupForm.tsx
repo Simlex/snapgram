@@ -4,7 +4,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Button } from '@/components/ui/button'
 import { useForm } from "react-hook-form"
 import { Input } from "@/components/ui/input"
-import { signUpValidationSchema } from "@/lib/validation"
+import { SignUpValidationSchema } from "@/lib/validation"
 import { z } from "zod"
 import Loader from "@/components/shared/Loader"
 import { createUserAccount } from "@/lib/appwrite/api"
@@ -25,8 +25,8 @@ const SignupForm = () => {
     const { mutateAsync: signInAccount, isPending: isSigningIn } = useSignInAccount();
 
     // 1. Define your form.
-    const form = useForm<z.infer<typeof signUpValidationSchema>>({
-        resolver: zodResolver(signUpValidationSchema),
+    const form = useForm<z.infer<typeof SignUpValidationSchema>>({
+        resolver: zodResolver(SignUpValidationSchema),
         defaultValues: {
             name: "",
             username: "",
@@ -36,7 +36,7 @@ const SignupForm = () => {
     })
 
     // 2. Define a submit handler.
-    async function onSubmit(values: z.infer<typeof signUpValidationSchema>) {
+    async function onSubmit(values: z.infer<typeof SignUpValidationSchema>) {
         // Create the user
         const newUser = await createUserAccount(values);
 
